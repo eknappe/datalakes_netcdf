@@ -8,10 +8,21 @@ A netCDF (Network Common Data Format) is a file format that is very effecient fo
 
 Examples of how dat can be stored in netCDFs:
 
+Two-dimensional data (e.e. temperature, salinity and oxygen saturation over an area)
+![Alt text](images/netcdf_1.png "2d_netcdf")
+
+In this case, variable1 = temperature, variable2 = salinity, variable3 = oxygen saturation, dimension1 = latitude, dimension2 = longitude, and you can add additional variables that were measured within the lat/lon)
+
+
 Three-dimensional data (e.g. temperature over an area varying with time)
-![Alt text](https://gitlab.eawag.ch/ellen.knappe/datalake-netcdf/-/blob/main/images/netcdf_2.pdf "3d_netcdf")
 
+![Alt text](images/netcdf_2.png "3d_netcdf")
 
+In this case, variable1 = temperature, dimension1 = latitude, dimension2 = longitude, and its varying through time (which is the unlimited dimension -- e.g. you can add additional timesteps)
+
+Four-dimensional data (e.g. temperature, salinity, and oxygen saturation over an area, varying through time)
+
+In this case, variable1 = temperature, variable2 = salinity, variable3 = oxygen saturation, dimension1 = latitude, dimension2 = longitude, and its varying through time (which is the unlimited dimension -- e.g. you can add additional timesteps). You could also add additional variables that fit these dimensions.
 
 
 ### Components of a netCDF 
@@ -25,4 +36,7 @@ Three-dimensional data (e.g. temperature over an area varying with time)
 ### Additional netCDF resources
 
 The unidata NetCDF user's guide: https://docs.unidata.ucar.edu/nug/current/index.html#netcdf_purpose
+
+ArcGIS also has a good explanation : https://desktop.arcgis.com/en/arcmap/latest/manage-data/netcdf/fundamentals-of-netcdf-data-storage.htm
+
 
