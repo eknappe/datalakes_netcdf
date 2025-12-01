@@ -9,7 +9,7 @@ A netCDF (Network Common Data Format) is a file format that is very effecient fo
 Examples of how dat can be stored in netCDFs:
 
 Three-dimensional data (e.g. temperature over an area varying with time)
-![Alt text](./images/netcdf_2.pdf)
+![Alt text](https://gitlab.eawag.ch/ellen.knappe/datalake-netcdf/-/blob/main/images/netcdf_2.pdf "3d_netcdf")
 
 
 
