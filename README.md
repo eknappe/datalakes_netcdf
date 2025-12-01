@@ -9,18 +9,21 @@ A netCDF (Network Common Data Format) is a file format that is very effecient fo
 ## Examples of how data can be stored in netCDFs:
 
 **Two-dimensional data** (e.e. temperature, salinity and oxygen saturation over an area)
-<img src="images/netcdf_1.png" alt="2d_netcdf" title="2d_netcdf" width="205">
+
+<img src="images/netcdf_1.png" alt="2d_netcdf" title="2d_netcdf" width="500">
 
 In this case, variable1 = temperature, variable2 = salinity, variable3 = oxygen saturation, dimension1 = latitude, dimension2 = longitude, and you can add additional variables that were measured within the same lat/lon)
 
 
 **Three-dimensional data** (e.g. temperature over an area varying with time)
-<img src="images/netcdf_2.png" alt="2d_netcdf" title="3d_netcdf" width="205">
+
+<img src="images/netcdf_2.png" alt="2d_netcdf" title="3d_netcdf" width="500">
 
 In this case, variable1 = temperature, dimension1 = latitude, dimension2 = longitude, and its varying through time (which is the unlimited dimension -- e.g. you can add additional timesteps)
 
 **Four-dimensional data** (e.g. temperature over an area at various depths, varying through time)
-<img src="images/netcdf_3.png" alt="2d_netcdf" title="4d_netcdf" width="205">
+
+<img src="images/netcdf_3.png" alt="2d_netcdf" title="4d_netcdf" width="500">
 
 In this case, variable1 = temperature, dimension1 = latitude, dimension2 = longitude, dimension3 = depth, and its varying through time (which is the unlimited dimension -- e.g. you can add additional timesteps). 
 
