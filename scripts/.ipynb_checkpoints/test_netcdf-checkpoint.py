@@ -21,9 +21,6 @@ data_directory = working_directory / 'data'
 
 
 #Import the instrument metadata file
-#netcdf_loc = data_directory / 'input/test_netcdfs/L1_Greifensee_CTD_W_20200629_000000.nc'
-netcdf_loc = data_directory / 'input/test_netcdfs/L1_lakelugano_20240301_000000.nc'
-#netcdf_loc = data_directory / 'input/test_netcdfs/Lake_Greifen_Meteo_2020-11-30.nc'
-
+netcdf_loc = data_directory / 'input/test_netcdfs/L1_Greifensee_CTD_W_20200629_000000.nc'
 
 ds = nc.Dataset(netcdf_loc)

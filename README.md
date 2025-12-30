@@ -1,70 +1,51 @@
 # Convert text files to netCDF formats
 
-The purpose of this script is to help people who are new to using netCDFs, convert their data into a netCDF format. This script was written to help users upload their data to the Datalakes platform (https://www.datalakes-eawag.ch/?home) , but is generic enough that it can be used for other purposes. 
+The purpose of this script is to help people who are new to using netCDFs, convert their data into a netCDF format. This script was written to help users upload their data to the Datalakes platform (https://www.datalakes-eawag.ch/?home), but is generic enough that it can be used for other purposes. 
 
-## What is a netCDF?
+## Which script to use:
 
-A netCDF (Network Common Data Format) is a file format that is very effecient for storing and sharing multi-dimensional data. The files are also capable of storing metadata so they are self-describing. The data is stored in a series of arrays that makes it easy to extract portions of the data (without reading in the entire file) and append additional data.
+1d_csv_to_netCDF.ipynb = meteostations, and other measurements that are taken at a single location through time
+2d_csv_to_netCDF.ipynb = bouys, thermister chains, and other measurements taken at different depths/water pressures/... through time
 
-## Examples of how data can be stored in netCDFs:
+See netCDF_README.md for more information about dimensions in netCDFs. 
 
-**Two-dimensional data** (e.e. temperature, salinity and oxygen saturation over an area)
+## How to use:
 
-<img src="images/netcdf_1.png" alt="2d_netcdf" title="2d_netcdf" width="500">
+To use this file, ensure that you have all the necessary python libraries installed. 
 
-In this case, variable1 = temperature, variable2 = salinity, variable3 = oxygen saturation, dimension1 = latitude, dimension2 = longitude, and you can add additional variables that were measured within the same lat/lon)
+If you use homebrew, create a new virtual environment and install the necesary libraries:
+```
+python3 -m venv ~/python-envs/projectname
+source ~/python-envs/projectname/bin/activate
+pip install -r requirements.txt
+```
 
-
-**Three-dimensional data** (e.g. temperature over an area varying with time)
-
-<img src="images/netcdf_2.png" alt="2d_netcdf" title="3d_netcdf" width="500">
-
-In this case, variable1 = temperature, dimension1 = latitude, dimension2 = longitude, and its varying through time (which is the unlimited dimension -- e.g. you can add additional timesteps)
-
-**Four-dimensional data** (e.g. temperature over an area at various depths, varying through time)
-
-<img src="images/netcdf_3.png" alt="2d_netcdf" title="4d_netcdf" width="500">
-
-In this case, variable1 = temperature, dimension1 = latitude, dimension2 = longitude, dimension3 = depth, and its varying through time (which is the unlimited dimension -- e.g. you can add additional timesteps). 
-
-
-## Components of a netCDF 
-
-### Variables 
-
- A variable is an array that stores the actual data (e.g. temperature, salinity, etc). Each variable has a name, data types and is defined by one or more dimensions.
-
-### Dimensions
-
-A netCDF dimension has a name and a size. For hydrology data, common dimensions are latitutde, longitutude, time, depth, etc. There can be only one unlimited dimension in a netCDF. The unlimited dimension does not have a fixed size, so it can "grow" in that direction (e.g. time series data can be continously appended). 
-
-### Coordinate variables
-
-A coordinate variable is a 1D variable with the same name as its dimension (e.g. time). It provides the actual values along that dimension (e.g. specific dates/times). 
-
-### Attributes
-
-These can store metadata/information about the data. Attributes can be specific to a variable (e.g. units, missing value code, valid range, etc.) or they can be global attributes (e.g. data source, creation date, conventions used, etc.).
+If you use conda users, create a new environment. 
+```
+conda env create -f environment.yml
+conda activate 
+```
 
 
+## Understanding components of the code
 
+* Step 1:
+    * File naming conventions: For this we want to make sure we are pulling the information from the files correctly. This means indicating where in the file name the identifier is. The identifier can be the dimension value or identifier that is linked to the dimension value (e.g. the serial number of the instrument). For example, if your files look like this:
+        
+        Example 1. lakelugano_exo_15m_2403071055.csv & lakelugano_exo_15m_2507010310.csv & so on ... in this case the number preceeding the m is actually the depth (dimension value). The second is date format. Thus we want all the different date files, so we will use a wildcard to capture all the different dates. 
+        SOLUTION: 'lake_lugano_exo_{idvalue}m_*.csv' (more specific, generally better)
+        ALTERNATIVE: '*_{idvalue}m_*.csv' (less specific, this could also grab lake_zurich_exo_10m_.csv files, or lake_lugano_max_20m_.csv files, which might not be what you want)
+        
+        Example 2. AUTO_200579_20250424_1602_data.txt & AUTO_200579_20250425_1602_data.txt & so on... in this case, the first number is a serial number of the instrument, and the instrument is measuring variables at a specific depth. The second number is the date, and the third number is another identifier. Since we want all the files for the different dates, we will use a wildcard which will also allow us to not have to define the third number. 
+        SOLUTION: 'AUTO_{idvalue}_*_data.txt'
+        ALTERNATIVE: 'AUTO_{idvalue}_*_*_data.txt'
+        
+        Example 3: If your files don't follow any naming convention, just indicate the file extension. This will grab all the files within the folder. This is not recommended because it will require a lot of work. 
+        SOLUTION: '*.txt' or '*.csv'
+        
+        
+        WHY: The * is like a wild card. The way the scripts works, it will look for files with the above patterns. For example, in solution 1 if the file is a .txt it will not read in the file. So use the * where needed, but best to be as specific as possible or it could grab files that are not data files. 
+        
 
-
-
-
-
-
-
-
-
-
-
-
-
-## Additional netCDF resources
-
-The unidata NetCDF user's guide: https://docs.unidata.ucar.edu/nug/current/index.html#netcdf_purpose
-
-ArcGIS also has a good explanation : https://desktop.arcgis.com/en/arcmap/latest/manage-data/netcdf/fundamentals-of-netcdf-data-storage.htm
-
-
+        
+        
