@@ -14,14 +14,17 @@ A netCDF (Network Common Data Format) is a file format that is very effecient fo
 
 In this case, variable1 = temperature, variable2 = salinity, variable3 = oxygen saturation, dimension1 = latitude, dimension2 = longitude, and you can add additional variables that were measured within the same lat/lon.
 
-
 **Three-dimensional data** (e.g. temperature over an area varying with time)
 
 <img src="images/netcdf_2.png" alt="2d_netcdf" title="3d_netcdf" width="500">
 
-In this case, variable1 = temperature, dimension1 = latitude, dimension2 = longitude, and its varying through time (which is the unlimited dimension -- e.g. you can add additional timesteps). You could also store additional variables with the same dimensions. 
+In this case, variable1 = temperature, dimension1 = latitude, dimension2 = longitude, and its varying through time = dimension3 (which is the unlimited dimension -- e.g. you can add additional timesteps). 
+
+**Three-dimensional data** (e.g. temperature and salinity over an area varying with time)
 
 <img src="images/netcdf_2-multi.png" alt="2d_netcdf_multi" title="3d_netcdf_multi" width="500">
+
+This is still three dimensions, variable1 = temperature, variable2 = salinity,dimension1 = latitude, dimension2 = longitude, and its varying through time = dimension3 (which is the unlimited dimension -- e.g. you can add additional timesteps). 
 
 **Four-dimensional data** (e.g. temperature over an area at various depths, varying through time)
 
@@ -38,17 +41,15 @@ In this case, variable1 = temperature, dimension1 = latitude, dimension2 = longi
 
 ### Dimensions
 
-A netCDF dimension has a name and a size. For hydrology data, common dimensions are latitutde, longitutude, time, depth, etc. There can be only one unlimited dimension in a netCDF. The unlimited dimension does not have a fixed size, so it can "grow" in that direction (e.g. time series data can be continously appended). 
+A netCDF dimension has a name and a size. For hydrology data, common dimensions are latitude, longitutude, time, depth, etc. There can be only one unlimited dimension in a netCDF. The unlimited dimension does not have a fixed size, so it can "grow" in that direction (e.g. time series data can be continously appended). Think of dimensions like the axes of your data. 
 
 ### Coordinate variables
 
-A coordinate variable is a 1D variable with the same name as its dimension (e.g. time). It provides the actual values along that dimension (e.g. specific dates/times). 
+A coordinate variable is a 1D variable with the same name as its dimension (e.g. time). It provides the actual values along that dimension (e.g. specific dates/times). Every dimension will have a coordinate variable associated with it to provide the actual values of the dimension.
 
 ### Attributes
 
 These can store metadata/information about the data. Attributes can be specific to a variable (e.g. units, missing value code, valid range, etc.) or they can be global attributes (e.g. data source, creation date, conventions used, etc.).
-
-
 
 
 ## Additional netCDF resources
