@@ -1,0 +1,96 @@
+{
+  "data": {
+    "type": "dois",
+    "attributes": {
+      "titles": [
+        {
+          "title": "Test: Thermistor data from Jemina",
+          "xml:lang": "en-us"
+        }
+      ],
+      "creators": [
+        {
+          "name": "Ellen Knappe",
+          "nameType": "Personal",
+          "nameIdentifiers": [
+            {
+              "schemeUri": "https://orcid.org",
+              "nameIdentifier": "0000-0001-5623-4955",
+              "nameIdentifierScheme": "ORCID"
+            }
+          ],
+          "affiliation": [
+            {
+              "name": "Lib4RI - Library for the Research Institutes within the ETH Domain: Eawag\\, Empa\\, PSI & WSL",
+              "schemeUri": "https://ror.org",
+              "affiliationIdentifier": "021f7p178",
+              "affiliationIdentifierScheme": "ROR"
+            }
+          ]
+        }
+      ],
+      "publisher": "Datalakes",
+      "publicationYear": 2026,
+      "resourceType": "Dataset",
+      "descriptions": [
+        {
+          "description": "This is some test data kindly provided by Jemima to test this all out. ",
+          "descriptionType": "Abstract",
+          "xml:lang": "en-us"
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Jemima Rama",
+          "nameType": "Personal",
+          "nameIdentifiers": [
+            {
+              "schemeUri": "https://orcid.org",
+              "nameIdentifier": "0000-0001-5753-583X",
+              "nameIdentifierScheme": "ORCID"
+            }
+          ],
+          "affiliation": [
+            {
+              "name": "Eawag",
+              "schemeUri": "https://ror.org",
+              "affiliationIdentifier": "00pc48d59",
+              "affiliationIdentifierScheme": "ROR"
+            }
+          ]
+        }
+      ],
+      "geoLocations": [
+        {
+          "geoLocationPlace": "Lake Zug",
+          "geoLocationPoint": {
+            "pointLatitude": 40.0,
+            "pointLongitude": 9.0
+          }
+        }
+      ],
+      "dates": [
+        {
+          "date": "2025-01-05/2025-06-01",
+          "dateType": "Collected"
+        }
+      ],
+      "subjects": [
+        {
+          "subject": "temperature",
+          "xml:lang": "en-us"
+        },
+        {
+          "subject": "depth",
+          "xml:lang": "en-us"
+        }
+      ],
+      "rightsList": [
+        {
+          "rights": "CC BY 4.0",
+          "xml:lang": "en-us"
+        }
+      ]
+    }
+  }
+}

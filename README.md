@@ -33,14 +33,19 @@ conda activate
     * File naming conventions: For this we want to make sure we are pulling the information from the files correctly. This means indicating where in the file name the identifier is. The identifier can be the dimension value or identifier that is linked to the dimension value (e.g. the serial number of the instrument). For example, if your files look like this:
         
         **Example 1.** lakelugano_exo_15m_2403071055.csv & lakelugano_exo_15m_2507010310.csv & so on ... in this case the number preceeding the m is actually the depth (dimension value). The second is date format. Thus we want all the different date files, so we will use a wildcard to capture all the different dates. 
+        
         *SOLUTION:* 'lake_lugano_exo_{idvalue}m_*.csv' (more specific, generally better)
+        
         *ALTERNATIVE:* '*_{idvalue}m_*.csv' (less specific, this could also grab lake_zurich_exo_10m_.csv files, or lake_lugano_max_20m_.csv files, which might not be what you want)
         
         **Example 2.** AUTO_200579_20250424_1602_data.txt & AUTO_200579_20250425_1602_data.txt & so on... in this case, the first number is a serial number of the instrument, and the instrument is measuring variables at a specific depth. The second number is the date, and the third number is another identifier. Since we want all the files for the different dates, we will use a wildcard which will also allow us to not have to define the third number. 
+        
         *SOLUTION:* 'AUTO_{idvalue}_*_data.txt'
+        
         *ALTERNATIVE:* 'AUTO_{idvalue}_*_*_data.txt'
         
         **Example 3.** If your files don't follow any naming convention, just indicate the file extension. This will grab all the files within the folder. This is not recommended because it will require a lot of work. 
+        
         *SOLUTION:* '*.txt' or '*.csv'
         
         

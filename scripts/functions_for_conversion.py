@@ -7,7 +7,6 @@ Created on Mon Jul 28 10:06:21 2025
 Data to netCDF converter for Datalakes platform
 """
 
-
 import os
 import pandas as pd
 import numpy as np
@@ -20,7 +19,7 @@ from datetime import datetime
 from typing import Dict, List, Optional, Tuple, Any
 import fnmatch
 
-### Set working directory -- python scripts are hosted in within a folder in this directory
+### Set working directory -- python scripts are hosted within a folder in this directory
 ### Going to be two folders in horizontal -- data and python
 working_directory = Path(__file__).parent.parent.resolve()
 data_directory = working_directory / 'data'
