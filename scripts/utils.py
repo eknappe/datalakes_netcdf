@@ -121,7 +121,7 @@ def combine_date_time(df, column_names, seperator = ' '):
         combined_column = df_copy[column_names[0]].astype(str)
     else:
         # multiple columns, eek, start us off
-        combined_column = df_copy[column_names[0]].astrype(str)
+        combined_column = df_copy[column_names[0]].astype(str)
         # loop it and smush them together
         for col in column_names[1:]:
             combined_column = combined_column + seperator + df_copy[col].astype(str)
@@ -130,8 +130,8 @@ def combine_date_time(df, column_names, seperator = ' '):
     datetime_series = None
 
     try:
-        datetime_series = pd.to_datetime(combined_column, infer_datetime_format = True)
-        print('yay pasring complete - delete after testing')
+        datetime_series = pd.to_datetime(combined_column)
+
     # didnt work, let the user know
     except Exception as e:
         print('Trouble formatting your date/time column(s). Please double check you entered the correct date/time column names.')
@@ -147,22 +147,13 @@ def combine_date_time(df, column_names, seperator = ' '):
 
     return df_copy
 
-# function to handle time offsets (want everything in utc time)
-def apply_time_correction(df, hour_offset):
-    if hour_offset > 0:
-        df['time'] = df['time'] + pd.to_timedelta(hour_offset, unit = 'h')
-
-    return df
-
-
-
 def files_to_process(base_folder, data_file_pattern, file_identifiers):
     """ find all the files which we want to process
     then create a list so we can cycle through them
     args:
         base_folder: path to the folder where data are collected
         data_file_pattern: how the data files are named, so we only grab those and not other information
-        file_indentifiers: the keys to find the data we want to collect
+        file_indentifiers: data frame that includes the file ids (col0), number of file (col1) and dim1 values (col2)
     returns:
         a list of the file locations
     """
@@ -170,17 +161,28 @@ def files_to_process(base_folder, data_file_pattern, file_identifiers):
         print(f"Warning: folder does not exist: {base_folder}")
         return {}, {}
 
-    #create a list to be filled
-    to_process_files = []
-
     # going to replace the idvalue with a wildcard since it will already only look for the identifiers
     broad_pattern = data_file_pattern.replace("{idvalue}", "*")
+    
+    # collect all matching files into a dataframe
+    found_files = pd.DataFrame([str(f) for f in Path(base_folder).rglob(broad_pattern) if f.is_file()], columns = ['file_path'])
+    
+    #nada?
+    if found_files.empty:
+        print("Warning: no files found. Please check datafile_information.csv")
+        return pd.DataFrame()
+    
+    # we want to include the dim1 values with their associated files
+    # so a bit of tinkering so we can merge the dataframes
+    id_dim1 = file_identifiers.iloc[:,[0,2]].copy()
+    id_dim1.columns = ['identifier', 'dim1']
+    id_dim1['identifier'] = id_dim1['identifier'].astype(str)
+    
+    # extract the identifer for the file path
+    # check the file path for the id
+    found_files['identifier'] = found_files['file_path'].apply(lambda fp: next((id for id in id_dim1['identifier'] if id in fp), None))
+    
+    # merge to attach dim1 values
+    result = found_files.dropna(subset=['identifier']).merge(id_dim1, on = 'identifier', how = 'left')
 
-    # cycle through the folder(s) and find the files that have the correct identifiers and file naming
-    for file_path in Path(base_folder).rglob(broad_pattern):
-        if file_path.is_file():
-            #check if any identifier is in the filename
-            if any(identifier in file_path.name for identifier in file_identifiers):
-                to_process_files.append(str(file_path))
-
-    return to_process_files
+    return result[['file_path', 'dim1']].reset_index(drop=True)
