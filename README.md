@@ -2,12 +2,14 @@
 
 The purpose of this script is to help people who are new to using netCDFs, convert their data into a netCDF format. This script was written to help users upload their data to the Datalakes platform (https://www.datalakes-eawag.ch/?home), but is generic enough that it can be used for other purposes. 
 
+This script was developed to help walk through the process of converting data files into netCDF format. It is meant to be general enough to work on various types of data, so it will require some input of information and stepping through the notebook carefully. The code was commented to help follow along. 
+
 ## Which script to use:
 
 1d_csv_to_netCDF.ipynb = meteostations, and other measurements that are taken at a single location through time
 2d_csv_to_netCDF.ipynb = bouys, thermister chains, and other measurements taken at different depths/water pressures/... through time
-*If each data file contains only a singular dimension value (e.g. all at a single depth), use option A
-*If each data file contains multiple dimension values (e.g multiple depths), use option B
+    *If each data file contains only a singular dimension value (e.g. all at a single depth), use option A
+    *If each data file contains multiple dimension values (e.g multiple depths, multiple pressure values), use option B
 
 See netCDF_README.md for more information about dimensions in netCDFs. 
 
