@@ -186,3 +186,21 @@ def files_to_process(base_folder, data_file_pattern, file_identifiers):
     result = found_files.dropna(subset=['identifier']).merge(id_dim1, on = 'identifier', how = 'left')
 
     return result[['file_path', 'dim1']].reset_index(drop=True)
+
+
+def files_to_process_1d(base_folder, data_file_pattern):
+    """ same as above but just for 1d data cause more simple"""
+    if not base_folder.exists():
+        print(f"Warning: folder does not exist: {base_folder}")
+        return {}, {}
+
+    file_list = [str(f) for f in base_folder.rglob(data_file_pattern) if f.is_file()]
+
+    if not file_list:
+        print("Warning no files found. Check folder path and file pattern.")
+        return []
+    
+    print(f"Total files found: {len(file_list)}")
+    return file_list
+
+

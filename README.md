@@ -6,6 +6,8 @@ The purpose of this script is to help people who are new to using netCDFs, conve
 
 1d_csv_to_netCDF.ipynb = meteostations, and other measurements that are taken at a single location through time
 2d_csv_to_netCDF.ipynb = bouys, thermister chains, and other measurements taken at different depths/water pressures/... through time
+*If each data file contains only a singular dimension value (e.g. all at a single depth), use option A
+*If each data file contains multiple dimension values (e.g multiple depths), use option B
 
 See netCDF_README.md for more information about dimensions in netCDFs. 
 
