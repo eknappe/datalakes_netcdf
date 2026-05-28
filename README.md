@@ -8,8 +8,9 @@ This script was developed to help walk through the process of converting data fi
 
 1d_csv_to_netCDF.ipynb = meteostations, and other measurements that are taken at a single location through time
 2d_csv_to_netCDF.ipynb = bouys, thermister chains, and other measurements taken at different depths/water pressures/... through time
-    * If each data file contains only a singular dimension value (e.g. all at a single depth), use option A
-    * If each data file contains multiple dimension values (e.g multiple depths, multiple pressure values), use option B
+
+* If each data file contains only a singular dimension value (e.g. all at a single depth), use option A
+* If each data file contains multiple dimension values (e.g multiple depths, multiple pressure values), use option B
 
 See netCDF_README.md for more information about dimensions in netCDFs. 
 
